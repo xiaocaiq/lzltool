@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <script>window.location.replace("https://lzltool.com/Doc/CsharpColor");</script>
+    <meta name="viewport" content="width=device-width" />
+    <title>在线文本差异对比,代码比对、代码比较工具—LZL在线工具</title>
+    <link rel="icon shortcut" href="/favicon.ico?v=1" type="image/x-icon">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    
+    <meta name="keywords" content="代码对比,代码对比工具,代码合并工具,在线代码对比工具,在线代码合并工具,代码差异对比,差异代码合并">
+    <meta name="description" content="在线代码/文本对比/合并工具方便程序员查找出两段代码间的差异。">
+    
+    
+    <script type="text/javascript">
+        
+        window.serverTimeDifference = 1794932944 - Math.round(Date.now() / 1000);
+        
+        window.toolId = '9E161DC247937BD80A6C0025F9695C30';
+        
+        window.loginUser = null;
+        //登录回调事件
+        window.loginUserCallback = null;
+        
+        window.loadPageRecords = {};
+        
+        window.errorRecords = [];
+        
+        window.lzltool = {};
+        
+        
+        window.errorRecord = function(errorInfo) {
+            errorRecords.push(errorInfo);
+        };
+        
+        window.loadPageRecords['START_LOAD_DOM'] = new Date();
+        
+            
+                window.onerror = function (msg, url, line, col, error) {
+                    function getEd() {
+                        try {
+                            if (!window._edf) return "[NoneEdf]";
+                            return JSON.parse(JSON.stringify(window._edf.log()));
+                        } catch (e) {
+                            return "[EdfError]=>" + JSON.stringify(e);
+                        }
+                    }
+                    window.errorRecord({
+                        msg: msg,
+                        url: url,
+                        line: line,
+                        col: col,
+                        error: cvtError(error),
+                        viewUrl: window.location.href,
+                        ed: getEd()
+                    });
+                    return true;
+                }
+            
+        function cvtError(error) {
+            if (!error) return '';
+            if (typeof (error) == 'string') return error;
+            return {
+                description: error.description,
+                fileName: error.fileName,
+                lineNumber: error.lineNumber,
+                message: error.message,
+                name: error.name,
+                number: error.number,
+                stack: error.stack
+            };
+        }
+            
+        
+        window.toolPromotion = { isDisplay: false };
+            
+    </script>
+    
+    <style type="text/css">
+        .layui-elem-quote span {
+            padding-left: 5px;
+            display: block;
+        }
+
+        .init-tools-tabs {
+            height: 35px;
+            overflow: hidden;
+            margin-bottom: 28px !important;
+        }
+        /*当前选中的Tab*/
+        .tab-current {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            line-height: 18px;
+            border: 1px solid transparent;
+            -webkit-border-radius: 4px 4px 0 0;
+            -moz-border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0;
+            padding-right: 12px;
+            padding-left: 12px;
+            margin-right: 2px;
+            display: block;
+            color: #555;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-bottom-color: transparent;
+            cursor: default;
+        }
+        .tool-bar {
+            background: #f5f5f5;
+            padding: 5px 15px;
+        }
+
+            .tool-bar ul {
+                text-align: right;
+            }
+
+                .tool-bar ul li {
+                    display: inline-block;
+                    margin-left: 15px;
+                    font-size: 12px;
+                    cursor: pointer;
+                    user-select: none;
+                    color: #555;
+                }
+
+                    .tool-bar ul li:hover {
+                        color: #1779ba;
+                    }
+
+                    .tool-bar ul li i {
+                        margin-right: 5px;
+                        vertical-align: middle;
+                        font-size: 16px;
+                        font-style: normal;
+                    }
+
+                    .tool-bar ul li a {
+                        color: #555;
+                        text-decoration: none;
+                    }
+
+                        .tool-bar ul li a:hover {
+                            color: #1779ba;
+                        }
+
+        .layui-tab-content {
+            padding: 20px !important;
+        }
+    </style>
+    
+    <style type="text/css">
+        /*修复CSS冲突BUG【开始】*/
+        .find-widget .wrapper {
+            width: 100% !important;
+        }
+
+        .find-widget textarea {
+            margin-bottom: 0px !important;
+            border-radius: 0px !important;
+            -webkit-box-shadow: inset 0 0px 0px !important;
+        }
+        /*修复CSS冲突BUG【结束】*/
+        .checkbox.inline {
+            cursor: pointer;
+        }
+
+        select {
+            cursor: pointer;
+        }
+        /*
+            全屏
+        */
+        .fullScreen {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 99999999999999;
+            height: 100%;
+        }
+
+        .layui-tab-content {
+            padding: 0px !important;
+        }
+    </style>
+
+
+    
+    <link href="https://cdn.lzltool.com/bundles/maincss?v=aGPDDiQRd5z3b31YRcV7pr_i_ZnKzxrp1CbSWagsjk01" rel="stylesheet"/>
+
+</head>
+<body>
+    <div id="header" style="text-align: center;position: relative; z-index: 999;display: flex">
+        
+        <div class="wrapper" style="width: 1100px;">
+            
+            <div id="logo" class="texthidden" onclick="javascript: location.href = '/';" style="background: url(https://cdn.lzltool.com/static/image/logo.png?v=1.0) no-repeat;position: absolute; z-index: 1;background-size: 100% 100%;" title="首页">
+                <h1>LZL TOOL 在线工具</h1>
+                
+                <a href="/" style="display: none">首页</a>
+            </div>
+            <ul class="layui-nav " style="background-color: #006cbf; background-color: #006cbf; width: 1000px; padding-left: 150px; margin: 0 auto;">
+                
+                <li class="layui-nav-item ">
+                    <span class="lzl-layui-navigation-bar-title">JSON工具<span class="layui-nav-more"></span></span>
+                    <dl class="layui-nav-child max-two layui-anim layui-anim-upbit">
+                        <dd>
+                            <a href="/Json" style="color: #FF5722">JSON在线解析及格式化验证</a>
+                        </dd>
+                        <dd>
+                            <a href="/Escape/JsonEscape">JSON压缩/格式化/转义</a>
+                        </dd>
+                        <dd>
+                            <a href="/JsonToCsharp">JSON转C#实体类</a>
+                        </dd>
+                        <dd>
+                            <a href="/Json2Php">JSON转PHP实体类</a>
+                        </dd>
+                        <dd>
+                            <a href="/JsonToJava">JSON转Java实体类</a>
+                        </dd>
+                        <dd>
+                            <a href="/json2xml">JSON转XML</a>
+                        </dd>
+                        <dd>
+                            <a href="/Json2Yaml">JSON转YAML</a>
+                        </dd>
+                        
+                    </dl>
+                </li>
+                
+                <li class="layui-nav-item ">
+                    <span class="lzl-layui-navigation-bar-title"> 加密/解密 <span class="layui-nav-more"></span></span>
+                    <dl class="layui-nav-child max-two layui-anim layui-anim-upbit">
+                        <dd>
+                            <a href="/md5">MD5免费解密</a>
+                        </dd>
+                        <dd>
+                            <a href="/Encrypt/Md5View">MD5加密</a>
+                        </dd>
+                        <dd>
+                            <a href="/Encrypt/EncryptView">加密/解密</a>
+                        </dd>
+                        <dd>
+                            <a href="/data-hash">哈希/散列</a>
+                        </dd>
+                        <dd>
+                            <a href="/GoogleDynamicPassword">在线谷歌动态密码(身份验证器)</a>
+                        </dd>
+                        <dd>
+                            <a href="/htpasswd">htpasswd 生成器</a>
+                        </dd>
+                        <dd>
+                            <a href="/SM2">国密 SM2 加密/解密</a>
+                        </dd>
+                        <dd>
+                            <a href="/SM3">国密 SM3 加密</a>
+                        </dd>
+                        <dd>
+                            <a href="/SM4">国密 SM4 加密/解密</a>
+                        </dd>
+                        <dd>
+                            <a href="/file-hash">计算文件哈希值</a>
+                        </dd>
+                    </dl>
+                </li>
+                
+                <li class="layui-nav-item ">
+                    <span class="lzl-layui-navigation-bar-title"> 压缩/格式化 <span class="layui-nav-more"></span></span>
+                    <dl class="layui-nav-child max-two layui-anim layui-anim-upbit">
+                        <dd>
+                            <a href="/jshtmlformat">JS/HTML格式化、压缩、加密</a>
+                        </dd>
+                        <dd>
+                            <a href="/cssformat">CSS压缩、格式化</a>
+                        </dd>
+                        <dd>
+                            <a href="/Json">JSON压缩、格式化</a>
+                        </dd>
+                        <dd>
+                            <a href="/xmlsort">XML排序、压缩、格式化</a>
+                        </dd>
+                        <dd>
+                            <a href="/sqlformat">SQL压缩、格式化</a>
+                        </dd>
+                        <dd>
+                            <a href="/sqlview">数据库插入、修改语句字段视图</a>
+                        </dd>
+                    </dl>
+                </li>
+                
+                <li class="layui-nav-item ">
+                    <span class="lzl-layui-navigation-bar-title"> 前端 <span class="layui-nav-more"></span></span>
+                    <dl class="layui-nav-child max-two layui-anim layui-anim-upbit">
+                        <dd>
+                            <a href="/Encrypt/ImageToBase64">图片转Base64编码</a>
+                        </dd>
+                        <dd>
+                            <a href="/color">颜色转换器 | 颜色选择器</a>
+                        </dd>
+                        <dd>
+                            <a href="/jsopenweb">JS打开新窗口Open函数参数生成工具</a>
+                        </dd>
+                        <dd>
+                            <a href="/svg2android">SVG转换成 Android VectorDrawable XML资源</a>
+                        </dd>
+                        <dd>
+                            <a href="/svg2png">SVG转Png | SVG预览</a>
+                        </dd>
+                        <dd>
+                            <a href="/image2svg">jpg,png,gif,icon转svg | 图片预览</a>
+                        </dd>
+                        <dd>
+                            <a href="/CharFavicon">字母图标生成器</a>
+                        </dd>
+                    </dl>
+                </li>
+                
+                <li class="layui-nav-item ">
+                    <span class="lzl-layui-navigation-bar-title dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown"> 转换 <span class="layui-nav-more"></span></span>
+                    <dl class="layui-nav-child max-two layui-anim layui-anim-upbit">
+                        <dd>
+                            <a href="/Escape/StringEscape">字符串转义</a>
+                        </dd>
+                        <dd>
+                            <a href="/Escape/UrlEncode">在线URL编码/URL解码</a>
+                        </dd>
+                        <dd>
+                            <a href="/Escape/HtmlEscape">在线HTML转义/反转义</a>
+                        </dd>
+                        <dd>
+                            <a href="/XmlEscape">XML转义/反转义</a>
+                        </dd>
+                        <dd>
+                            <a href="/KeyCode">KeyCode键盘按键码</a>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">编码/解码</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/hex">十六进制编码/解码</a>
+                                </li>
+                                <li>
+                                    <a href="/base64">Base64编码/解码</a>
+                                </li>
+                                <li>
+                                    <a href="/base64url">Base64URL编码/解码</a>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">编程语言转换</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/cs2vb">C#代码转VB.NET代码</a>
+                                </li>
+                                <li>
+                                    <a href="/vb2cs">VB.NET代码转C#代码</a>
+                                </li>
+                                <li>
+                                    <a href="/protobufconvert">.proto转序列化代码</a>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">单位转换</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/unitconvert/area">面积</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/heat">热量</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/power">功率</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/volume">体积</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/length">长度</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/pressure">压力</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/temperature">温度</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/density">密度</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/force">力</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/time">时间</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/speed">速度</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/datastore">数据存储</a>
+                                </li>
+                                <li>
+                                    <a href="/unitconvert/angle">角度</a>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dd>
+                            <a href="/SqlToCsharp">SQL转C#实体类</a>
+                        </dd>
+                        <dd>
+                            <a href="/timestamp">Unix时间戳</a>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">二维码/条形码</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/qrcode">二维码生成</a>
+                                </li>
+                                <li>
+                                    <a href="/barcode">条形码生成</a>
+                                </li>
+                                <li>
+                                    <a href="/qrcodeBatch">二维码批量生成</a>
+                                </li>
+                                <li>
+                                    <a href="/barcodeBatch">条形码批量生成</a>
+                                </li>
+                                <li>
+                                    <a href="/deqr-batch">二维码批量识别</a>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">C#相关转换</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/InterpolationToFormat">C# 内插字符串转 string.Format</a>
+                                </li>
+                                <li>
+                                    <a href="/CsharpDto2Json">C# Dto 转 Json</a>
+                                </li>
+                                <li>
+                                    <a href="/CsharpDto2JavaDto">C# Dto 转 Java Dto</a>
+                                </li>
+                                <li>
+                                    <a href="/CsharpDto2Cpp">C# Dto 转 C++ Dto</a>
+                                </li>
+                                <li>
+                                    <a href="/CsharpDto2Go">C# Dto 转 Go Dto</a>
+                                </li>
+                                <li>
+                                    <a href="/CsharpDto2TypeScriptDto">C# Dto 转 TypeScript Dto</a>
+                                </li>
+                                <li>
+                                    <a href="/CsharpDto2Crystal">C# Dto 转 Crystal Dto</a>
+                                </li>
+                                <li>
+                                    <a href="/CsharpDto2SqlServer">C# Dto 转 SqlServer 创表SQL</a>
+                                </li>
+                                <li>
+                                    <a href="/CsharpDto2Elm">C# Dto 转 Elm Dto</a>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">ini转换成xml、json、yaml</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/ini2xml">ini转xml</a>
+                                </li>
+                                <li>
+                                    <a href="/ini2json">ini转Json</a>
+                                </li>
+                                <li>
+                                    <a href="/ini2yaml">ini转Yaml</a>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">xml转换成json、yaml、ini</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/Xml2Json">XML转JSON</a>
+                                </li>
+                                <li>
+                                    <a href="/Xml2Yaml">XML转YAML</a>
+                                </li>
+                                <li>
+                                    <a href="/Xml2Ini">XML转Ini</a>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">yaml转换成json、xml、ini</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/Yaml2Json">YAML转Json</a>
+                                </li>
+                                <li>
+                                    <a href="/Yaml2Xml">YAML转Xml</a>
+                                </li>
+                                <li>
+                                    <a href="/Yaml2Ini">YAML转Ini</a>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dd>
+                            <a href="/chinese-convert">简繁转换</a>
+                        </dd>
+                        <dd>
+                            <a href="/daxiaoxie">英文字母大小写转换</a>
+                        </dd>
+                    </dl>
+                </li>
+                
+                <li class="layui-nav-item ">
+                    <span class="lzl-layui-navigation-bar-title dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown"> 文档 <span class="layui-nav-more"></span></span>
+                    <dl class="layui-nav-child max-two layui-anim layui-anim-upbit">
+                        <dd>
+                            <a href="/blog" style="color: #FF5722">博客文章列表</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/httpcontent">HTTP Content-Type对照表</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/ascii">ASCII码对照表</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/htmlescape">HTML转义字符表</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/port">端口号大全</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/httpstate">HTTP状态码查询</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/magicbytes">文件头字节</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/csharptocaddadd">C#与C++类型对应表</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/blood">血型遗传规律表</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/school">高校查询</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/tld">顶级域名后缀</a>
+                        </dd>
+                        <dd>
+                            <a href="/size">尺码对照表</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/excel2010function">Excel 函数大全</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/ClientInfo">获取您的浏览器信息</a>
+                        </dd>
+                        <dd>
+                            <a href="/doc/LanguageRanking">编程语言最新排名</a>
+                        </dd>
+                    </dl>
+                </li>
+                
+                <li class="layui-nav-item ">
+                    <span class="lzl-layui-navigation-bar-title"> 生活工具 <span class="layui-nav-more"></span></span>
+                    <dl class="layui-nav-child max-two layui-anim layui-anim-upbit">
+                        <dd>
+                            <a href="/rmb">人民币大写转换</a>
+                        </dd>
+                        <dd>
+                            <a href="/carcode">全国车牌归属地查询</a>
+                        </dd>
+                        <dd>
+                            <a href="/mp3">Mp3音频播放器</a>
+                        </dd>
+                        <dd>
+                            <a href="/wav">Wav音频播放器</a>
+                        </dd>
+                        <dd>
+                            <a href="/ogg">OGG音频播放器</a>
+                        </dd>
+                        <dd>
+                            <a href="/keyboard">键盘按键测试</a>
+                        </dd>
+                        <dd>
+                            <a href="/word-frequency">中文词频分析</a>
+                        </dd>
+                        <dd>
+                            <a href="/VolumeCalculator/Sphere">体积计算器</a>
+                        </dd>
+                        <dd>
+                            <a href="/fontdetect">电脑字体检测</a>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">键盘/鼠标测试</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/MouseCps">鼠标点击速度测试</a>
+                                </li>
+                                <li>
+                                    <a href="/ReactionSpeedTest">反应速度测试</a>
+                                </li>
+                                <li>
+                                    <a href="/ScrollSpeedTest">鼠标滚动速度测试</a>
+                                </li>
+                                <li>
+                                    <a href="/MouseDriftTest">鼠标漂移检测</a>
+                                </li>
+                            </ol>
+                        </dd>
+                    </dl>
+                </li>
+
+                
+                <li class="layui-nav-item ">
+                    <span class="lzl-layui-navigation-bar-title dropdown-toggle" aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown"> 其他 <span class="layui-nav-more"></span></span>
+                    <dl class="layui-nav-child max-two layui-anim layui-anim-upbit">
+                        <dd>
+                            <a href="/Regex">正则测试</a>
+                        </dd>
+                        <dd>
+                            <a href="/quchong">文本去重复工具</a>
+                        </dd>
+                        <dd>
+                            <a href="/dm">名单随机点名</a>
+                        </dd>
+                        <dd>
+                            <a href="/guid">GUID/UUID批量生成工具</a>
+                        </dd>
+                        <dd>
+                            <a href="/guidgen">创建GUID</a>
+                        </dd>
+                        <dd>
+                            <a href="/ImageHolder">生成占位图片</a>
+                        </dd>
+                        <dd>
+                            <a href="/sqlite-viewer">Sqlite查看器|修改器</a>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">摸鱼神器</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/gobang">五子棋</a>
+                                </li>
+                                <li>
+                                    <a href="/tictactoe">井字棋</a>
+                                </li>
+                            </ol>
+                        </dd>
+                        <dd>
+                            <a href="/contrastdiff">文本差异对比</a>
+                        </dd>
+                        <dd>
+                            <a href="/FileContentComparison">对比文件内容</a>
+                        </dd>
+                        <dd>
+                            <a href="/Index/Contact">联系我们</a>
+                        </dd>
+                        <dd>
+                            <a href="/privacy">隐私政策</a>
+                        </dd>
+                            <dd>
+                                <a href="/feedback">用户反馈</a>
+                            </dd>
+                        <dd>
+                            <a href="/robots">robots.txt文件生成</a>
+                        </dd>
+                        <dd>
+                            <a href="/MyIp">我的IP地址</a>
+                        </dd>
+                        <dd>
+                            <a href="/UserAgent">User-Agent查看/解析</a>
+                        </dd>
+                        <dd>
+                            <a href="/ip2int">IP转数字,数字转IP</a>
+                        </dd>
+                        <dd>
+                            <a href="/jwt-decode">JWT在线解密</a>
+                        </dd>
+                        <dd>
+                            <a href="/cookie2json">Cookie转Json</a>
+                        </dd>
+                        <dd class="menu-three">
+                            <span class="lzl-layui-child-navigation-bar-title">Curl命令转代码</span>
+                            <ol class="layui-nav-child three-hide" style="top: -4px;">
+                                <li>
+                                    <a href="/curl2cs">Curl转C#</a>
+                                </li>
+                                <li>
+                                    <a href="/curl2java">Curl转Java</a>
+                                </li>
+                                <li>
+                                    <a href="/curl2python">Curl转Python</a>
+                                </li>
+                                <li>
+                                    <a href="/curl2go">Curl命令转Go代码</a>
+                                </li>
+                                <li>
+                                    <a href="/curl2php">Curl命令转Php代码</a>
+                                </li>
+                            </ol>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <button class="main-search-button" title="可点击搜索，也可按 Ctrl+K 搜索" id="openSearch">
+            <div class="main-search-left">
+                <div class="main-search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <div class="main-search-text">搜索工具</div>
+            </div>
+            <div class="main-search-button-keyboard-shortcut">
+                <div class="main-search-button-key">Ctrl</div>
+                <div class="main-search-button-key">K</div>
+            </div>
+        </button>
+        <div class="lzl-user-trigger" id="lzl-user-trigger-btn">
+            
+            <span style="color:#fff; min-width: 80px; display: none;" title="LZL在线工具:登录或注册账号" id="loginOrRegister">登录 / 注册</span>
+            
+            <span id="lzl-user-header-name" class="lzl-user-header-name">User</span>
+
+            
+            <span class="lzl-user-vip-badge-icon lzl-user-spacer-left" id="lzl-user-header-vip-icon" style="display: none;">
+                <span class="iconfont icon-huiyuan"></span>
+            </span>
+
+            
+            <svg id="lzl-user-arrow-icon" class="lzl-user-arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+        </div>
+    </div>
+    
+    <div>
+        <div id="toolPromotionBanner" class="tool-promotion wrapper" role="region" aria-label="工具推广" hidden>
+            <a class="tool-promotion__link" target="_blank" rel="noopener noreferrer">
+                <img class="tool-promotion__image" alt="">
+            </a>
+            <button class="tool-promotion__close" type="button" aria-label="关闭推广" title="关闭">&times;</button>
+        </div>
+        
+
+
+<div id="wrapper">
+    <div class="wrapper">
+        <div class="wrapper ad-wrap" style="margin-top: 15px"></div>
+        <div class="toolsTab  clearfix">
+            <ul class="nav nav-tabs init-tools-tabs" id="tools-tabs">
+                        <li class="active">
+                            <span class="tab-current">文本差异对比</span>
+                        </li>
+                        <li>
+                            <a href="/Text/JsonContrastDiff" target="_blank">JSON差异对比</a>
+                        </li>
+                        <li>
+                            <a href="/Text/YamlContrastDiff" target="_blank">Yaml差异对比</a>
+                        </li>
+                        <li>
+                            <a href="/Text/CssContrastDiff" target="_blank">Css差异对比</a>
+                        </li>
+                        <li>
+                            <a href="/hanzibihua" target="_blank">汉字笔画数查询</a>
+                        </li>
+                        <li>
+                            <a href="/unicode" target="_blank">Unicode/ASCII编码互转</a>
+                        </li>
+                        <li>
+                            <a href="/txt-incise" target="_blank">文本文件切割</a>
+                        </li>
+                        <li>
+                            <a href="/symbol-convert" target="_blank">中英文符号转换</a>
+                        </li>
+                        <li>
+                            <a href="/txt-clear" target="_blank">中英文数字清除</a>
+                        </li>
+                        <li>
+                            <a href="/txt-edit" target="_blank">文本处理</a>
+                        </li>
+                        <li>
+                            <a href="/zero-width-encrypt" target="_blank">零宽加密/解密</a>
+                        </li>
+                        <li>
+                            <a href="/Text/SimpleTextProcessor" target="_blank">简单文本框</a>
+                        </li>
+                        <li>
+                            <a href="/gen-long-tail-keyword" target="_blank">生成长尾关键词</a>
+                        </li>
+                        <li>
+                            <a href="/remove-line-breaks" target="_blank">删除回车换行</a>
+                        </li>
+                        <li>
+                            <a href="/txt-file-merger" target="_blank">文本文件合并</a>
+                        </li>
+                        <li>
+                            <a href="/emoji-remover" target="_blank">表情符号删除</a>
+                        </li>
+            </ul>
+        </div>
+        <div class="layui-tab layui-tab-card" lay-filter="box" id="tools-body">
+            <div class="tool-bar">
+                <ul>
+                    <li id="share-tool-link">
+                        <i class="iconfont icon-sharelink" style="font-size: 14px;"></i><span>分享工具</span>
+                    </li>               
+                        <li title="反馈您的想法，让LZL在线工具更完美">
+                            <a href="/feedback" target="_blank">
+                                <i class="iconfont icon-feedback"></i><span>反馈建议</span>
+                            </a>
+                        </li>
+                </ul>
+            </div>
+            <div class="layui-tab-content">
+                
+<div id="diff-editor" style="width: 100%; height: 500px; border: 1px solid #ddd;"></div>
+<div style="display: flex; padding: 10px;">
+    <label class="checkbox inline" style="font-size: 16px;" title="如果取消勾选则页面打开的时候不会加入演示的代码内容">
+        <input type="checkbox" id="isShowDemo"> 显示演示内容
+    </label>
+    <label class="checkbox inline" style="font-size: 16px;">
+        <input type="checkbox" id="isInlineDiff"> 折叠相同的代码
+    </label>
+    <label class="checkbox inline" style="font-size: 16px;">
+        <input type="checkbox" id="isIgnoreTrimWhitespace"> 忽略空格差异
+    </label>
+    <label class="checkbox inline" style="font-size: 16px;">
+        <input type="checkbox" id="isWordWrap"> 自动换行
+    </label>
+    <div class="input-prepend" style=" padding-left: 10px;">
+        <span class="add-on" style="font-size: 14px; height: 20px; line-height: 20px;">编辑器主题</span><select style="height: 30px; font-size: 14px; width: 60px;" class="input-small" id="theme">
+            <option value="vs">默认</option>
+            <option value="vs-dark">深色</option>
+            <option value="hc-black">黑色</option>
+        </select>
+    </div>
+    <div class="input-prepend" style=" padding-left: 10px;">
+        <span class="add-on" style="font-size: 14px; height: 20px; line-height: 20px;">语言</span><select style="height: 30px; font-size: 14px; width: 100px;" class="input-small" id="language">
+            <option value="text">文本</option>
+            <option value="json">JSON</option>
+            <option value="yaml">Yaml</option>
+            <option value="sql">SQL</option>
+            <option value="xml">XML</option>
+            <option value="css">CSS</option>
+            <option value="ini">INI</option>
+            <option value="c">C</option>
+            <option value="cpp">C++</option>
+            <option value="csharp">C#</option>
+            <option value="java">Java</option>
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="html">HTML</option>
+            <option value="lua">Lua</option>
+            <option value="kotlin">Kotlin</option>
+            <option value="go">GO</option>
+            <option value="fsharp">F#</option>
+            <option value="php">PHP</option>
+            <option value="objective-c">Objective-C</option>
+            <option value="swift">Swift</option>
+            <option value="typescript">TypeScript</option>
+            <option value="vb">VB</option>
+            <option value="r">R</option>
+            <option value="less">Less</option>
+            <option value="bat">Bat</option>
+            <option value="proto">Proto</option>
+            <option value="mysql">MySql</option>
+            <option value="markdown">MarkDown</option>
+            <option value="razor">Razor</option>
+            <option value="shell">Shell</option>
+            <option value="pgsql">PgSql</option>
+            <option value="redis">Redis</option>
+            <option value="abap">abap</option>
+            <option value="aes">aes</option>
+            <option value="apex">apex</option>
+            <option value="azcli">azcli</option>
+            <option value="bicep">bicep</option>
+            <option value="cameligo">cameligo</option>
+            <option value="clojure">clojure</option>
+            <option value="coffeescript">coffeescript</option>
+            <option value="csp">csp</option>
+            <option value="dart">dart</option>
+            <option value="dockerfile">dockerfile</option>
+            <option value="ecl">ecl</option>
+            <option value="elixir">elixir</option>
+            <option value="flow9">flow9</option>
+            <option value="freemarker2">freemarker2</option>
+            <option value="freemarker2.tag-angle.interpolation-bracket">freemarker2.tag-angle.interpolation-bracket</option>
+            <option value="freemarker2.tag-angle.interpolation-dollar">freemarker2.tag-angle.interpolation-dollar</option>
+            <option value="freemarker2.tag-auto.interpolation-bracket">freemarker2.tag-auto.interpolation-bracket</option>
+            <option value="freemarker2.tag-auto.interpolation-dollar">freemarker2.tag-auto.interpolation-dollar</option>
+            <option value="freemarker2.tag-bracket.interpolation-bracket">freemarker2.tag-bracket.interpolation-bracket</option>
+            <option value="freemarker2.tag-bracket.interpolation-dollar">freemarker2.tag-bracket.interpolation-dollar</option>
+            <option value="graphql">graphql</option>
+            <option value="handlebars">handlebars</option>
+            <option value="hcl">hcl</option>
+            <option value="julia">julia</option>
+            <option value="lexon">lexon</option>
+            <option value="liquid">liquid</option>
+            <option value="m3">m3</option>
+            <option value="mips">mips</option>
+            <option value="msdax">msdax</option>
+            <option value="pascal">pascal</option>
+            <option value="pascaligo">pascaligo</option>
+            <option value="perl">perl</option>
+            <option value="pla">pla</option>
+            <option value="plaintext">plaintext</option>
+            <option value="postiats">postiats</option>
+            <option value="powerquery">powerquery</option>
+            <option value="powershell">powershell</option>
+            <option value="pug">pug</option>
+            <option value="qsharp">qsharp</option>
+            <option value="redshift">redshift</option>
+            <option value="restructuredtext">restructuredtext</option>
+            <option value="ruby">ruby</option>
+            <option value="rust">rust</option>
+            <option value="sb">sb</option>
+            <option value="scala">scala</option>
+            <option value="scheme">scheme</option>
+            <option value="scss">scss</option>
+            <option value="sol">sol</option>
+            <option value="sparql">sparql</option>
+            <option value="st">st</option>
+            <option value="systemverilog">systemverilog</option>
+            <option value="tcl">tcl</option>
+            <option value="twig">twig</option>
+            <option value="verilog">verilog</option>
+        </select>
+    </div>
+    <div class="input-prepend" style="padding-left: 10px;">
+        <span style="vertical-align: -webkit-baseline-middle;">按 <code>F11</code> 全屏展示</span>
+    </div>
+</div>
+
+
+
+            </div>
+        </div>
+        
+    <p class="layui-elem-quote">
+        <strong>工具简介</strong>
+        <span>本软件方便程序员查找出两段代码之间的差异，并能进行合并。</span>
+        <strong>常用快捷键操作（编辑器中操作）</strong>
+        <span><b>查找：</b>Ctrl + F</span>
+        <span><b>替换：</b>Ctrl + H</span>
+        <span><b>撤销操作：</b>Ctrl + Z</span>
+        <span><b>重做操作：</b>Ctrl + Y</span>
+        <span><b>调整字体大小：</b>Ctrl + 鼠标滑轮</span>
+        <span><b>跳转到指定行：</b>Ctrl + G</span>
+        <span><b>全屏展示差异：</b>F11</span>
+        <span><b>更多快捷操作：</b>F1</span>
+    </p>
+
+    </div>
+</div>
+
+
+
+    </div>
+    
+            <div class="fo-collect" style="display: block; border-bottom: 0px;" id="reminder-collect">
+            <span class="close-collect" title="关闭" style="display: none">✕</span>
+            <img src="https://cdn.lzltool.com/static/image/collect.png" style="width: 52px;height: 86px;" title="收藏" />
+        </div>
+        <!-- 浮动关注组件 -->
+        <div class="fo-window" style="display: block; border-bottom: 0px;" id="rightFloatOperation">
+            <span class="fo-collection" onclick="javascript:location.href = '/'" title="首页/更多工具">
+                <span class="iconfont icon-iconfontzhizuobiaozhun023101" style="margin: 18px 13px 0px 0px;font-size: 26px;"></span>
+            </span>
+            
+            <span class="fo-collection" onclick="ContactUs()" title="联系我们">
+                <span class="iconfont icon-changyonglogo28" style="margin: 18px 18px 0px 0px;font-size: 32px;"></span>
+            </span>
+            
+            <div id="goToTop" style="display: none;">
+                <span class="fo-totop fo-collection" style="display: block;" title="顶部">
+                    <span class="iconfont icon-rocket" style="margin: 18px 18px 0px 0px;font-size: 32px;"></span>
+                </span>
+            </div>
+        </div>
+    <div id="footer">
+        <p class="wrapper" align="center">
+            在线工具 由
+            <a href="https://www.lzltool.com/" target="_blank">LZLTOOL.COM</a> 所有 |
+            <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备2025128672号</a>
+            
+                <span style="margin-left: 10px; display: none;">友情链接：<a href="https://jsyx.lzltool.com" target="_blank">即时游戏</a></span>
+        </p>
+    </div>
+    
+    <div class="main-search-overlay" id="mainSearchOverlay">
+        <div class="main-search-popup">
+            <div class="main-search-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="main-search-input" id="mainSearchInput" placeholder="请输入需要搜索的工具..." autocomplete="off">
+                <span class="main-search-clear" id="clearSearch">✕</span>
+            </div>
+            <div class="main-search-body" id="mainSearchResults">
+                <!-- 搜索结果将在这里动态生成 -->
+            </div>
+            <div class="main-search-footer">
+                <div class="keyboard-shortcuts">
+                    <span><span class="main-search-key">↑</span> <span class="main-search-key">↓</span> 导航</span>
+                    <span><span class="main-search-key">Enter</span> 选择</span>
+                    <span><span class="main-search-key">Esc</span> 关闭</span>
+                </div>
+                <div>搜索由 <strong>LZL搜索引擎</strong> 提供</div>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框背景 -->
+    <div id="lzl-login-modal-overlay" class="lzl-login-modal-overlay">
+        <div class="lzl-login-modal-container">
+            <!-- 关闭按钮 -->
+            <button class="lzl-login-close-btn" id="lzl-login-close-btn">&times;</button>
+
+            <!-- 标签页导航 -->
+            <div class="lzl-login-tab-nav">
+                <button class="lzl-login-tab-btn" tab-id="lzl-login-tab">账号密码登录</button>
+                <button class="lzl-login-tab-btn lzl-login-active" tab-id="lzl-login-wechat-tab">微信扫码登录</button>
+                
+            </div>
+
+            <!-- 标签页内容容器 -->
+            <div class="lzl-login-tab-content-wrapper">
+                <!-- 登录标签页 -->
+                <div id="lzl-login-tab" class="lzl-login-tab-content">
+                    <h2>登录</h2>
+                    <form id="lzl-login-form">
+                        <div class="lzl-login-input-group">
+                            <input type="text" id="lzl-login-phone" placeholder="用户名/手机号/邮箱" required>
+                        </div>
+                        <div class="lzl-login-input-group">
+                            <input type="password" id="lzl-login-password" placeholder="密码" required>
+                        </div>
+                        <button type="submit" class="lzl-login-primary-btn">登录</button>
+                        <button type="button" class="lzl-login-secondary-btn" id="lzl-login-secondary-btn">注册账号</button>
+                        <a href="#" class="lzl-login-forgot-link" id="lzl-login-forgot-link">忘记密码？</a>
+                    </form>
+                </div>
+
+                <!-- 注册标签页 -->
+                <div id="lzl-login-wechat-tab" class="lzl-login-tab-content lzl-login-active">
+                    <h2 class="lzl-login-wechat-tab-title"><span class="iconfont icon-changyonglogo28"></span>微信扫码关注 LZL工具 登录/注册</h2>
+                    <div class="lzl-login-wechat-tab-title-tips">未注册的用户登录自动创建账号</div>
+                    <div class="lzl-login-wechat-tab-wechat-qrcode" id="lzl-login-wechat-tab-wechat-qrcode">
+                        
+                    </div>
+                    <p class="lzl-login-wechat-tab-info">
+                        登录即视为同意
+                        <a href="/license" class="" target="_blank" style="color: #999;">使用协议</a>、
+                        <a href="/privacy" class="" target="_blank" style="color: #999;">隐私政策</a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 用户信息下拉面板 ===== -->
+    <div class="lzl-user-dropdown" id="lzl-user-dropdown-panel">
+
+        <!-- 头部：只显示名字和身份标签 -->
+        <div class="lzl-user-dropdown-header">
+            <div class="lzl-user-name-text" id="lzl-user-menu-name">Load...</div>
+            <div id="lzl-user-level-tag-container"></div>
+        </div>
+
+        <!-- VIP 卡片 -->
+        <div class="lzl-user-vip-card-container" id="lzl-user-vip-section" style="display:none;">
+            <div class="lzl-user-vip-card">
+                <div class="lzl-user-vip-status-row">
+                    <span><span class="iconfont icon-huiyuan"></span> 尊贵会员</span>
+                    <span id="lzl-user-vip-warning" class="lzl-user-warning-dot" style="display:none;" title="即将过期"></span>
+                </div>
+                <div class="lzl-user-vip-date">有效期至：<span id="lzl-user-vip-expire"></span></div>
+                <div class="lzl-user-renew-btn" id="lzl-user-vip-renew-btn">立即续费</div>
+            </div>
+        </div>
+
+        <!-- 菜单列表 -->
+        <div class="lzl-user-menu-list">
+            <div class="lzl-user-menu-item" id="lzl-user-open-user-info">
+                <svg class="lzl-user-menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                账号信息
+            </div>
+            
+
+            <div class="lzl-user-border-top"></div>
+            <div class="lzl-user-menu-item lzl-user-item-danger" id="login-user-out">
+                <svg class="lzl-user-menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" x2="9" y1="12" y2="12" /></svg>
+                退出登录
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+    
+    
+    
+<script src="https://cdn.lzltool.com/bundles/jqcomjs?v=Ngm75L78G3Mq5wBq646YCoFvhdvbcNQZyfgipuA_SL41" crossorigin="anonymous"></script>
+
+    
+    
+    <script src="https://cdn.lzltool.com/bundles/Layout/ToolBarLayoutViewJs?v=1S_F_OLycqTKp3unvzLpAKP0h4ofdD5gFo0IPebD99I1" crossorigin="anonymous"></script>
+
+    
+    <script type="text/javascript">
+        window._demoCode = {
+            left: "/*以下为演示内容，请添加您自己的内容 =^_^= */\na {\n    text-decoration: none;\n    color: #006cbf;\n}\n\n    a:hover {\n        color: #000000;\n        cursor: pointer;\n    }\n\nimg, input {\n    border: none;\n}\n\n.wrapper {\n    width: 1160px;\n    margin: 0 auto;\n}\n\n.clearfix:after {\n    clear: both;\n    content: \" \";\n    display: none;\n    font-size: 0;\n    height: 0;\n    visibility: hidden;\n}",
+            right: "/*以下为演示内容，请添加您自己的内容 ^_^ */\na {\n    text-decoration: none;\n    color: #006cbf;\n}\n\n    a:hover {\n        color: #006cbf;\n        cursor: pointer;\n    }\n\nimg, input {\n    border: none;\n}\n\n.wrapper {\n    width: 1165px;\n    margin: 0 auto;\n}\n\n.clearfix:after {\n    clear: both;\n    content: \" \";\n    display: block;\n    font-size: 0;\n    height: 0;\n    visibility: hidden;\n}"
+        };
+        $('#language').val('text');
+    </script>
+    <script src="https://cdn.lzltool.com/bundles/Text/ContrastDiffJs?v=yFZ720OpPDLGp0ywRfT0X_7vehHNsejtiO--e4IU2Jo1" crossorigin="anonymous"></script>
+
+
+
+    
+    <script src="https://cdn.lzltool.com/bundles/mainjs?v=kplRuMtEDYKbaIkypsXG2BDubHCYgFS0xXCmD1bjXMU1" crossorigin="anonymous"></script>
+
+    <script>
+        
+        layui.config({
+            dir: '/static/layui/'
+        });
+    $(function () {
+        //记录DOM加载完毕时间
+        window.loadPageRecords['END_DOM_LOAD'] = new Date();
+    });
+    $(window).load(function () {
+        //记录页面加载完毕时间
+        window.loadPageRecords['END_LOAD'] = new Date();
+        Log4.loadRecords({
+            ControllerName: 'text',
+            ActionName: 'contrastdiff',
+            Record: window.loadPageRecords
+        }); //提交记录日志
+        window.loadPageRecords = {};//清空记录
+    });
+    
+    window.addEventListener("beforeunload",
+        function (event) {
+            window.loadPageRecords['CLOSE'] = new Date();
+            Log4.loadRecords({
+                ControllerName: 'text',
+                ActionName: 'contrastdiff',
+                Record: window.loadPageRecords
+            }); //提交记录日志
+        });
+    
+    window.errorRecord = function(errorInfo) {
+        Log4.error(JSON.stringify(errorInfo));
+    }
+    
+    for (var i = 0; i < window.errorRecords.length; i++) {
+        window.errorRecord(window.errorRecords[i]);
+    }
+    layui.use('element',
+        function() {
+            var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+            //监听导航点击
+            element.on('nav(demo)',
+                function(elem) {
+                    //console.log(elem)
+                    layer.msg(elem.text());
+                });
+            //三级菜单
+            $(".menu-three").on("mouseover", function () {
+                var ol = $(this).find('ol');
+                //计算出三级菜单位置
+                ol.css('left', $(this).width() + 'px');
+                //删除隐藏标记
+                ol.removeAttr('hide');
+                //删除隐藏样式
+                ol.removeClass('three-hide');
+            }).on("mouseout",function () {
+                var ol = $(this).find('ol');
+                //打上隐藏标记
+                ol.attr('hide', true);
+                setTimeout(function () {
+                    //如果有隐藏标记则隐藏
+                    if (ol.attr('hide')) {
+                        ol.addClass('three-hide');
+                    }
+                },100);
+            });
+            $(".menu-three>ol").on("mouseover",function () {
+                //删除隐藏标记
+                $(this).removeAttr('hide');
+                //删除隐藏样式
+                $(this).removeClass('three-hide');
+            }).on("mouseout",function () {
+                var ol = $(this);
+                //打上隐藏标记
+                ol.attr('hide', true);
+                setTimeout(function () {
+                    //如果有隐藏标记则隐藏
+                    if (ol.attr('hide')) {
+                        ol.addClass('three-hide');
+                    }
+                },100);
+            });
+        });
+
+        
+            
+                var _hmt = _hmt || [];
+                (function() {
+                    var hm = document.createElement("script");
+                    hm.src = "https://hm.baidu.com/hm.js?02adca86e4204a781f0aa0b1f9128891";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                })();
+            
+    </script>
+    
+    
+        <script type="text/javascript">
+            (function (e) { function t(e) { var t = location.href, n = t.split("").reverse(), r = e.split(""), i = []; for (var s = 0, o = 16; s < o; s++) { i.push(r[s] + (n[s] || "")) } return i.join("") } var n = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.so\.com)/gi, r = e.location.href; if (r && !n.test(r) && window.navigator.appName) { var i = "//s.360.cn/so/zz.gif", o = "ab77b6ea7f3fbf79", u = t(o), a = new Image; r && (i += "?url=" + encodeURIComponent(r)), o && (i += "&sid=" + o), u && (i += "&token=" + u), o && (a.src = i) } })(window);
+        </script>
+    </body>
+</html>
